@@ -17,6 +17,10 @@ app.get('/', function(req, res, next){
   res.render('index', {title: 'Express-Weather'});
 });
 
+app.get('/about', function(req, res, next){
+  res.send('about page');
+});
+
 app.get('/:postcode', function(req, res, next){
   var zipcode = req.params.postcode;
   var location = zipdb.zipcode(zipcode);
@@ -33,7 +37,7 @@ app.get('/:postcode', function(req, res, next){
       next();
       return;
     }
-    
+
     res.json({
       zipcode: zipcode,
       city: location.city,
@@ -47,6 +51,6 @@ app.use(function(req, res){
   res.status(404).send('No location');
 });
 
-http.createServer(app).listen(3000, function(){
-  console.log("listening on port 3000");
-});
+http.createServer(app).listen(3000);
+
+module.exports = app;
