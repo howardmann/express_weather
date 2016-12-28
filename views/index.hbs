@@ -8,6 +8,17 @@
 </head>
 <body>
   <h1>Welcome to {{title}}</h1>
+  <form>
+    <fieldset>
+      <legend>Weather</legend>
+      <input type="text" name="zip" placeholder="enter US zip code" autofocus=true required=true>
+      <input type="submit" value="check">
+    </fieldset>
+  </form>
+  <br>
+  <div id="main"></div>
 
+  <script src="jquery.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>

@@ -28,9 +28,20 @@ app.get('/:postcode', function(req, res, next){
   var latitude = location.latitude;
   var longitude = location.longitude;
 
-  weather.forecast(latitude)
-  
-  res.render('index', {title: location.city})
+  weather.forecast(latitude, longitude, function(err, data){
+    if (err){
+      next();
+      return;
+    }
+    
+    res.json({
+      zipcode: zipcode,
+      city: location.city,
+      summary: data.currently.summary,
+      temperature: data.currently.temperature
+    });
+  });
+
 });
 app.use(function(req, res){
   res.status(404).send('No location');
